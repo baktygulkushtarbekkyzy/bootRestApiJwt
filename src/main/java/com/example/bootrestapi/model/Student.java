@@ -1,12 +1,14 @@
 package com.example.bootrestapi.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import static jakarta.persistence.CascadeType.*;
+import javax.persistence.*;
+
+import static javax.persistence.CascadeType.*;
+
 
 @Entity
 @Table(name = "students")

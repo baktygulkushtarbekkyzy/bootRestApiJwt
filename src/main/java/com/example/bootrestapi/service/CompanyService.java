@@ -1,5 +1,6 @@
 package com.example.bootrestapi.service;
 
+import com.example.bootrestapi.converter.companyConverter.CompanyConverterView;
 import com.example.bootrestapi.dto.company.CompanyRequest;
 import com.example.bootrestapi.dto.company.CompanyResponse;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public interface CompanyService {
     List<CompanyResponse> getAllCompany();
 
     CompanyResponse deleteCompanyById(Long id);
+
+     CompanyConverterView findAllCompanies(String text, int page, int size);
 
     int numberOfStudents();
 }

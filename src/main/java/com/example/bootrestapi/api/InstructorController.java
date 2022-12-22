@@ -7,6 +7,7 @@ import com.example.bootrestapi.dto.instructor.InstructorResponse;
 import com.example.bootrestapi.service.CourseService;
 import com.example.bootrestapi.service.InstructorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -14,10 +15,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/instructors")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class InstructorController {
     private final InstructorService instructorService;
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public List<InstructorResponse> getAll(){
         return instructorService.getAllInstructor();
     }
@@ -33,6 +36,7 @@ public class InstructorController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public InstructorResponse getById(@PathVariable Long id){
         return instructorService.getById(id);
     }

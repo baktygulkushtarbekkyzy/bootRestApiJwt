@@ -4,6 +4,7 @@ import com.example.bootrestapi.dto.group.GroupRequest;
 import com.example.bootrestapi.dto.group.GroupResponse;
 import com.example.bootrestapi.service.GroupService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -12,10 +13,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/groups")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class GroupController {
     private final GroupService groupService;
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public List<GroupResponse> getAll(){
         return groupService.getAllGroup();
     }
@@ -31,6 +34,7 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public GroupResponse getById(@PathVariable Long id){
         return groupService.getById(id);
     }
@@ -46,7 +50,8 @@ public class GroupController {
     }
 
     @PostMapping("/assign")
-    public String  assignToStudent(@RequestParam Long groupId,@RequestParam Long studentId){
+    public String
+    assignToStudent(@RequestParam Long groupId,@RequestParam Long studentId){
         return groupService.assignGroupToStudent(groupId, studentId);
     }
 }

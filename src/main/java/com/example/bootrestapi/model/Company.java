@@ -4,12 +4,12 @@ package com.example.bootrestapi.model;
 
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -25,6 +25,7 @@ public class Company {
     @SequenceGenerator(name = "company_gen",sequenceName = "company_seq",allocationSize = 1)
     private Long id;
     private String companyName;
+    private String text;
     private String locatedCountry;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")

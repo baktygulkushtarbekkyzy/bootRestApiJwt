@@ -7,6 +7,7 @@ import com.example.bootrestapi.dto.student.StudentResponse;
 import com.example.bootrestapi.service.LessonService;
 import com.example.bootrestapi.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -14,10 +15,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/students")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class StudentController {
     private final StudentService studentService;
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public List<StudentResponse> getAll(){
         return studentService.getAllStudent();
     }
@@ -33,6 +36,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public StudentResponse getById(@PathVariable Long id){
         return studentService.getById(id);
     }

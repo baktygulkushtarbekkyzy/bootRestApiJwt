@@ -7,6 +7,7 @@ import com.example.bootrestapi.dto.lesson.LessonResponse;
 import com.example.bootrestapi.service.InstructorService;
 import com.example.bootrestapi.service.LessonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,10 +16,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/lessons")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class LessonController {
     private final LessonService lessonService;
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public List<LessonResponse> getAll(){
         return lessonService.getAllLesson();
     }
@@ -34,6 +37,7 @@ public class LessonController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public LessonResponse getById(@PathVariable Long id){
         return lessonService.getById(id);
     }

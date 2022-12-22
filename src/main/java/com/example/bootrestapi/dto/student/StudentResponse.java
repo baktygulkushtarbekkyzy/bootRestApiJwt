@@ -1,6 +1,5 @@
 package com.example.bootrestapi.dto.student;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
